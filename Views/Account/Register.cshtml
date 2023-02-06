@@ -1,0 +1,89 @@
+﻿@model SelfieSmile.ViewModels.ViewModelRegisteration
+
+@{
+    ViewData["Title"] = "Register";
+}
+<h1>Register</h1>
+
+<hr />
+<form asp-action="Register" enctype="multipart/form-data">
+  <div class="row">
+    <div class="col-md-4">
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmEmail" class="control-label"></label>
+                <input asp-for="ConfirmEmail" class="form-control" />
+                <span asp-validation-for="ConfirmEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-primary" />
+            </div>
+            
+    </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="w-100">profile picture</label>
+              @*  @if (Model.ProfilePicture != null)
+                {
+                    <img id="ProfilePicture" alt="profile picture" class="profile-picture" src="data:image/*;base64,@(Convert.ToBase64String(Model.ProfilePicture))" />
+                }
+                else
+                {
+                
+                }*@
+                    <img id="ProfilePicture" alt="profile picture" src="~/assets/img/profilePicPlaceHolder.png" class="profile-picture"  />
+
+                <div class="custom-file mt-1">
+                    <input type="file" onchange="document.getElementById('ProfilePicture').src = window.URL.createObjectURL(this.files[0])" accept="image/*" asp-for="ProfilePicture" class="custom-file-input" />
+                    <span asp-validation-for="ProfilePicture" class="text-danger"></span>
+
+                </div>
+
+            </div>
+        </div>
+  </div>
+ 
+</form>
+
+
+    <a class="btn btn-primary" asp-action="Login">Sign in</a>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

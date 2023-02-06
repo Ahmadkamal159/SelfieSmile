@@ -1,0 +1,49 @@
+﻿@model IEnumerable<SelfieSmile.ViewModels.ViewModelOffer>
+
+
+<h1>Offers</h1>
+
+@{
+    if(Model != null)
+    {
+        foreach(var item in Model)
+        {
+            <div class="card" style="width: 18rem;">
+                <img src="~/assets/img/offer.jpg" class="card-img-top" alt="Offer">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">@item.Title</h5>
+                    <p class="card-text text-info">@item.Description</p>
+                    <p class="card-text text-warning">PromoCode:@item.PromoCode</p>
+                    <p class="card-text text-danger">Expiry Date: @item.ExpiryDate</p>
+                    @{
+                        if (User.IsInRole("Admin") || User.IsInRole("Manager")){
+                            <a  asp-route-Id="@item.Id" asp-action="EditOffer" class="btn btn-primary">EditOffer</a>
+                            <a  asp-route-Id="@item.Id" asp-action="DeleteOffer" class="btn btn-danger">Delete Offer</a>
+
+                        }
+                    }
+                </div>
+            </div>
+        }
+
+        <h2 class="fst-italic">Stay tuned for more offers</h2>
+    }
+
+}
+@{
+if (User.IsInRole("Admin") || User.IsInRole("Manager")){
+<a  asp-action="AddOffer" class="btn btn-primary">AddOffer</a>
+ }
+}
+
+@section pic{
+    <style type="text/css">
+        body {
+            background-image: url('/assets/img/backbround.jpg');
+            margin: 0;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+}

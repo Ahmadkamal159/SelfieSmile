@@ -1,0 +1,64 @@
+﻿@model List<SelfieSmile.ViewModels.ViewModelUserwithRole>
+
+@{
+    ViewData["Title"] = "UsersRolesIndex";
+}
+
+<h1>UsersRolesIndex</h1>
+<form asp-controller="Role" asp-action="UsersRolesIndex">
+    <p>
+        Find By Email: <input type="text" name="search" />
+        <input type="submit" value="Find user" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => Model.FirstOrDefault().UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.FirstOrDefault().Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.FirstOrDefault().Role)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+            @foreach (var item in Model)
+        {
+            var username=item.UserName;
+            var email = item.Email;
+            var viewdata = (IEnumerable<SelectListItem>)ViewData["roles"];
+
+              <tr>
+
+                <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                   <form method="Post" asp-action="SaveChanges" >
+                            <select size="1" asp-for="@item.Role" asp-items="@viewdata"></select>
+                        <input asp-for="@item.UserName" type="hidden">
+                        <input asp-for="@item.Email" type="hidden" >
+                        <input type="submit" value="Update Role" class="btn btn-primary"/>
+                   </form>
+                </td>
+            </tr>
+            i++;
+        }
+        }
+    </tbody>
+</table>
+
+    @*                      <button class="btn btn-primary" asp-action="SaveChanges" asp-controller="Role" type="submit" id="btnrun @i"> Update Role</button>
+    *@@*                    <a class="btn btn-primary" href="@Url.Action("SaveChanges","Role",new { UserName = item.UserName, Email = item.Email,Roles=item.Roles})"> SaveChanges </a>
+    *@

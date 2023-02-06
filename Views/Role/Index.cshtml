@@ -1,0 +1,45 @@
+﻿@model List<SelfieSmile.ViewModels.ViewModelRole>
+
+
+<h4>Roles</h4>
+<table class="table bordered">
+<tr>
+    <th>Role Name</th>
+    <th>Role Id</th>
+
+</tr>
+@{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.RoleName</td>
+            <td>@item.Id</td>
+            <td> <a asp-action="Edit" asp-controller="Role" class="btn btn-primary" onclick="ConfirmEdit(event)" asp-route-Id="@item.Id"> Edit Role </a>  </td>
+            <td> <a asp-action="Delete" asp-controller="Role" class="btn btn-danger" onclick="ConfirmDelete(event)" asp-route-Id="@item.Id"> Delete Role </a>  </td>
+        </tr>
+
+    }
+
+}
+
+</table>
+<div>
+    <a class="btn btn-outline-primary" asp-action="AddRole" asp-controller="Role"> Add Role </a>
+</div>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+    function ConfirmEdit() {
+        document.getElementById("")
+        var accept = confirm("Are You Sure?");
+        if (accept == false) {
+            event.preventDefault();//pervent go to server
+        }
+    }
+    function ConfirmDelete() {
+        document.getElementById("")
+        var accept = confirm("Are You Sure?");
+        if (accept == false) {
+            event.preventDefault();//pervent go to server
+        }
+    }
+    </script>
